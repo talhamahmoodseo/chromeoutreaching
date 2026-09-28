@@ -1,0 +1,64 @@
+# Outreach Desk v0.6 progress
+
+- Starting from the delivered v0.5 source in outreach-desk-v05. Prior release remains intact.
+- Goal: campaign-isolated research/results, polished UI, structured exports, recoverable Moz fallback, language gates, contact/database checks, sender profiles and optional Gemini.
+- Current: preparing v0.6 workspace and module contracts.
+- Pending: implement modules; integrate worker/UI; verify campaign isolation, recovery, extraction and exports; package downloadable release.
+- Email accounts will be sender profiles for campaign/form drafts. Inbox authentication and automatic sending are not configured; avoid implying mailbox access.
+- Created v0.6 source workspace from delivered v0.5; no code changes yet.
+- Added publisher-language.js: conservative supported-language detection; unknown never auto-rejected. Pending integration/tests.
+- Updated publisher-rules.js: quality score, automatic usable-contact readiness, protected hard exclusions and low-score first-party support fallback.
+- Current: replacing the sheet endpoint with campaign-scoped keys and named-column migration that preserves existing rows.
+- Updated publisher-model.js: v3 migration, campaign ownership, scored readiness and language metadata with legacy backup support.
+- Added page language evidence to collector output; email extraction unchanged.
+- Completed: Apps Script now isolates records by campaign, adds campaign/contact metadata, and appends v0.6 headers to valid v0.5 sheets without clearing existing data.
+- Completed: setup guide documents campaign-scoped keys, new output fields, and safe v0.5 schema upgrade behavior.
+- Added campaign-aware publisher/contact CSV export module with formula-safe RFC4180 output, deduplicated fields, contact suitability filtering, and explicit all-contact audit mode.
+- Integrated campaign-isolated records, resume checkpoints, Moz fallback choice, language gate, opt-in Gemini and sender profiles into worker. Pending migration/QA.
+- Added extension/publisher-ai.js: optional Gemini REST transport with a 15-second total timeout, bounded input, structured outputs, and source-only evidence/contact guards.
+- Refreshed `outreach-desk-v06/extension/publisher.html` with the campaign selector/report, structured opportunity filters, campaign language and safety controls, sender profiles, Gemini settings, output Sheet controls, Moz fallback dialog, and v0.6 footer while retaining legacy UI hooks.
+- Current: output client now derives campaign-scoped stable keys and a legacy fallback key.
+- Added publisher-export tests for campaign identity, one-row publisher output, contact audit mode, suitability filtering, formula escaping, markup stripping, and CSV quoting/parsing.
+- Updated worker database email indexes, report-preserving backup restore and isolated recheck campaigns.
+- Tightened PublisherAI to cap the complete model prompt, including its safety instructions, at 12,000 characters.
+- Current: output records now include campaign name/ID, lead score, detected language, and selected email type.
+- Refined export mappings to read the v0.6 score field and leave the model's `unknown` language sentinel blank; scalar email lists now leave contact metadata blank.
+- Completed: output transport now validates campaign-derived stable keys and forwards only the added fixed-schema contact fields.
+- Updated export coverage to assert the v0.6 `score` field, UTF-8 BOM, and blank handling for the `unknown` language sentinel.
+- Added tests/publisher-ai.test.cjs: mocked-fetch coverage for transport shape, model validation, output safety, evidence/email grounding, size limits, timeout, and HTTP errors.
+- Fixed the VM test harness to expose the same timer and abort globals used by browsers.
+- Completed: XLSX and CSV database parsing now returns all indexed domains/emails plus status-qualified contacted domain/email indexes.
+- Current: output tests now assert campaign identity and new email/score/language metadata.
+- Current: Apps Script tests now locate cells by header name and verify preserved manual outreach fields.
+- Integrated campaign reports, quality/language/filter views, Moz choice dialog, sender profiles and Gemini controls in publisher-ui.js. Awaiting HTML/CSS module.
+- Current: regression coverage now checks campaign-isolated duplicates and non-destructive v0.5 upgrades.
+- Bounded Gemini page payload/output; unknown AI language cannot cause a campaign mismatch.
+- Added on-page wrong-niche title gate and email-duplicate reporting before readiness.
+- Completed: dedicated database tests cover CSV/XLSX emails, recognized statuses, negatives, and formula/hyperlink URL indexing.
+- Added the requested minimum-score opportunity filter and publisher/contact export-mode selector to the v0.6 markup.
+- Current: database fixtures distinguish the all-email index from contacted-only status rows.
+- Added presentation styles for opportunity score badges and compact campaign report metric cards.
+- Current: output test fixtures now recompute campaign keys when exercising multiple campaign IDs.
+- Current: the output test keeps email type blank when no best contact is selected; selected-contact metadata remains covered on the write path.
+- Replaced the publisher stylesheet with a responsive, blue-accented neutral dashboard and added visual support for campaign metric cards and opportunity scores; the search language list includes the `any` option with English still selected by default.
+- Current: duplicate-check parsing retains every syntactically valid email address, including machine and placeholder values present in source sheets.
+- Completed: database test asserts machine-address values remain available in the full email index for duplicate checks.
+- Integrated script dependencies and restored detail drawer scrolling. Updated worker harness imports.
+- Fixed Gemini key storage integration and cleared stale search snapshots when skipping. Updated legacy assertions for intentional scoring, campaign restore, and isolated recheck behavior.
+- Added integration regressions for campaign DA isolation, Moz fallback, exact stop/resume, database toggles, contacted email suppression, campaign language, sender snapshots and Gemini key lifecycle.
+- DA isolation fixture now includes two verified SERP metric cards, matching Moz preflight requirements.
+- Added focused language evidence and mismatch regressions.
+- Generated updated local UI preview. All 112 automated tests pass; browser QA pending.
+- Visual QA caught missing report-metric styling; added spaced metric typography and responsive report layout. Corrected email-status labels and Gemini disclosure. Backup restoration now retains contact suppression and new outreach statuses.
+- Regenerated preview after visual fixes.
+- Updated `tests/publisher-preview-mock.js` for v0.6 UI QA with schema 3 campaign fixtures (Health, Home, Education), cross-campaign shared domains, varied DA/language settings, sender profiles, Gemini model settings, Sep 26 dates, `?moz` fallback state, and sender/output/Moz preview commands.
+- Fixed sender-form CSS overflow and connected Gemini keyword checkbox to the actual AI query path. Updated Ready/Moz wording and side-panel stop/resume/fallback controls.
+- Refreshed dashboard and side-panel previews after integration fixes.
+- Final integration: all 112 Node tests and 14 browser extraction checks pass. Fixed comma-separated TLD filters, preserved legacy screening rejections on migration/restore, aligned Moz action labels, and advanced package/manifest to 0.6.0.
+- Updated README with v0.6 installation, migration, campaign workflow, scoring, contacts, Gemini privacy/fallback, output and known limits.
+- Regenerated preview with final user-facing labels.
+- Added migration/restore regressions for old campaign-specific search rejections.
+- Updated release notes, architecture and validation docs for v0.6; live-account validation limits are explicit.
+- Corrected export dialog wording for publisher vs contact modes; bounded long output error messages. CSV serializer and integration tests pass; cloud-browser download event timed out, so real Chrome download remains a user smoke check.
+- Regenerated final preview; packaging source, bundled extension, setup and tests.
+- Completed final source/asset validation and all 114 tests. Added plain-text installation guide. All authorized implementation work complete; release archive saving next.

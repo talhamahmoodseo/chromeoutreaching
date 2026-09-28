@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Outreach Desk · Guest post research</title>
+  <link rel="stylesheet" href="../extension/publisher.css">
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="../extension/publisher.html" aria-label="Outreach Desk home">
+      <span class="brand-mark" aria-hidden="true">↗</span>
+      <span class="brand-name">outreach<span>desk</span></span>
+      <small>GUEST POST RESEARCH</small>
+    </a>
+    <nav aria-label="Workspace">
+      <button data-view="opportunities" class="active">Opportunities</button>
+      <button data-view="searches">Searches</button>
+      <button data-view="databases">Databases</button>
+      <button data-view="preferences">Preferences</button>
+    </nav>
+    <span class="local"><i aria-hidden="true"></i> Research saved locally</span>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div>
+        <div class="eyebrow" id="eyebrow">THE PUBLISHER WORKBENCH</div>
+        <h1 id="page-title">Find the right opening.</h1>
+        <p id="page-copy">Real publishing opportunities. The right contact. A clear reason for every result.</p>
+      </div>
+      <button id="new-search" class="button primary">＋ New search</button>
+    </div>
+
+    <div id="error-banner" role="alert" hidden></div>
+    <section id="run" class="run" aria-live="polite" hidden></section>
+
+    <section data-page="opportunities">
+      <div class="campaign-overview">
+        <label class="campaign-picker" for="campaign-filter">
+          <span>Campaign view</span>
+          <select id="campaign-filter" aria-label="Filter opportunities by campaign">
+            <option value="">All campaigns</option>
+          </select>
+        </label>
+        <div id="campaign-report" class="campaign-report" aria-live="polite">
+          <span class="report-kicker">CAMPAIGN REPORT</span>
+          <span class="report-copy">Choose a campaign to see its research at a glance.</span>
+        </div>
+      </div>
+
+      <div class="workbench">
+        <aside class="filter-rail" aria-label="Shortlist navigation">
+          <div class="rail-heading">YOUR SHORTLIST</div>
+          <div id="inbox-filters"></div>
+          <div class="rail-divider"></div>
+          <div class="rail-heading">FOUND WITH KEYWORD</div>
+          <input id="keyword-find" class="rail-search" placeholder="Find a keyword…" aria-label="Find a keyword">
+          <div id="keyword-list"></div>
+          <div class="rail-note">
+            <span aria-hidden="true">◎</span>
+            <p>A title starts the check.<br>Publisher evidence completes it.</p>
+          </div>
+        </aside>
+
+        <div class="results-column">
+          <div class="list-header">
+            <div>
+              <h2 id="list-title">All opportunities</h2>
+              <span id="list-count"></span>
+            </div>
+            <div class="list-actions">
+              <button id="copy-emails" class="button">Copy emails</button>
+              <button id="export" class="button">↓ Export</button>
+            </div>
+          </div>
+
+          <div class="filter-panel">
+            <div class="filter-primary">
+              <label class="search">
+                <span aria-hidden="true">⌕</span>
+                <input id="search" placeholder="Search domain, title or email…" aria-label="Search opportunities">
+              </label>
+              <label class="filter-control"><span>Opportunity</span>
+                <select id="type-filter" aria-label="Opportunity type">
+                  <option value="">Any opportunity</option>
+                  <option>Guest post</option>
+                  <option>Contributor</option>
+                  <option>Sponsored content</option>
+                  <option>Advertising</option>
+                </select>
+              </label>
+              <label class="filter-control"><span>Contact</span>
+                <select id="availability-filter" aria-label="Contact availability">
+                  <option value="">Any contact</option>
+                  <option value="email">Has email</option>
+                  <option value="form">Form only</option>
+                  <option value="none">No email</option>
+                </select>
+              </label>
+              <label class="filter-control"><span>Sort by</span>
+                <select id="sort" aria-label="Sort results">
+                  <option value="new">Recently checked</option>
+                  <option value="score">Highest score</option>
+                  <option value="domain">Domain A–Z</option>
+                  <option value="keyword">Keyword A–Z</option>
+                  <option value="purpose">Best contact first</option>
+                </select>
+              </label>
+            </div>
+            <details class="advanced-filters">
+              <summary>More filters</summary>
+              <div class="advanced-filter-grid">
+                <label class="filter-control"><span>Email type</span>
+                  <select id="email-filter" aria-label="Email type">
+                    <option value="">Any email type</option>
+                    <option>Editorial</option>
+                    <option>Submissions</option>
+                    <option>Advertising</option>
+                    <option>Partnerships</option>
+                    <option>General contact</option>
+                    <option>Sales</option><option>Customer support</option>
+                  </select>
+                </label>
+                <label class="filter-control"><span>Niche</span>
+                  <select id="niche-filter" aria-label="Filter by niche">
+                    <option value="">Any niche</option>
+                  </select>
+                </label>
+                <label class="filter-control"><span>Score minimum</span>
+                  <input id="score-min-filter" type="number" min="0" max="100" inputmode="numeric" aria-label="Minimum opportunity score" placeholder="Any">
+                </label>
+                <label class="filter-control"><span>DA minimum</span>
+                  <input id="da-min-filter" type="number" min="0" max="100" inputmode="numeric" aria-label="Minimum Domain Authority" placeholder="Any">
+                </label>
+                <label class="filter-control"><span>DA maximum</span>
+                  <input id="da-max-filter" type="number" min="0" max="100" inputmode="numeric" aria-label="Maximum Domain Authority" placeholder="Any">
+                </label>
+                <label class="filter-control"><span>Domain extensions</span>
+                  <input id="tld-filter" type="text" aria-label="Filter by top-level domain" placeholder="e.g. com, org, co.uk">
+                </label>
+                <label class="filter-control"><span>Research language</span>
+                  <select id="language-filter" aria-label="Filter by research language">
+                    <option value="">Any language</option>
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
+                    <option value="it">Italian</option>
+                    <option value="pt">Portuguese</option>
+                    <option value="nl">Dutch</option>
+                    <option value="pl">Polish</option>
+                    <option value="ur">Urdu</option>
+                    <option value="ar">Arabic</option>
+                  </select>
+                </label>
+                <label class="filter-control"><span>Checked within</span>
+                  <select id="recent-filter" aria-label="Filter by recent research">
+                    <option value="">Any time</option>
+                    <option value="7">Last 7 days</option>
+                    <option value="30">Last 30 days</option>
+                  </select>
+                </label>
+              </div>
+            </details>
+          </div>
+
+          <div id="selection" class="selection" hidden></div>
+          <div class="results-card">
+            <div id="results"></div>
+            <div id="pager"></div>
+          </div>
+          <div class="list-foot">
+            <span id="filter-caption">One publisher per row. Every discovery preserved.</span>
+            <button id="reset-filters" class="text-button">Reset filters</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-page="searches" hidden>
+      <div class="section-bar">
+        <div>
+          <h2>Every search tells a story.</h2>
+          <p>Track useful results, rejected pages and the keywords that earn their place.</p>
+        </div>
+      </div>
+      <div id="campaign-list"></div>
+    </section>
+
+    <section data-page="databases" hidden>
+      <div class="database-grid">
+        <div class="card connect-card">
+          <span class="feature-icon" aria-hidden="true">▤</span>
+          <h2>Your existing publisher lists</h2>
+          <p>Paste publicly viewable Google Sheets links. Every tab is checked before a new search begins.</p>
+          <label>Sheet links
+            <textarea id="sheet-links" rows="5" placeholder="https://docs.google.com/spreadsheets/d/…/edit&#10;One link per line"></textarea>
+          </label>
+          <p class="hint">Anyone with the link · Viewer. Downloads must be allowed by the owner. Sheets remain read-only.</p>
+          <button id="connect" class="button primary wide">Connect lists</button>
+          <div class="divider">or import a snapshot</div>
+          <label class="button wide file-label">↑ Upload XLSX or CSV
+            <input id="import-db" type="file" accept=".xlsx,.csv" hidden>
+          </label>
+          <p class="hint center">XLSX: all tabs · CSV: one tab · 20 MB maximum</p>
+        </div>
+        <div class="database-sources">
+          <div class="section-bar">
+            <h2>Connected sources</h2>
+            <span id="db-count" class="tag"></span>
+          </div>
+          <div id="db-list"></div>
+          <div class="note">
+            <strong>Every source must be ready.</strong>
+            <p>If one connected sheet fails, research waits. An incomplete database check must never silently turn old publishers into “new” opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-page="preferences" hidden>
+      <div class="preferences-layout">
+        <form id="settings">
+          <div class="card settings-card">
+            <span class="eyebrow">RELEVANCE FIRST</span>
+            <h2>Research filters</h2>
+            <label class="check">
+              <input type="checkbox" name="excludePlatforms" checked>
+              <span>Exclude GitHub, WordPress platform/hosted sites and community forums</span>
+            </label>
+            <p class="hint">Independent sites running WordPress software are eligible. The software itself says nothing about a publisher’s relevance.</p>
+            <label class="check">
+              <input type="checkbox" name="researchUnclear">
+              <span>Research unclear search results instead of skipping them</span>
+            </label>
+            <p class="hint">Clear listicles, how-to articles and blocked domains are still rejected. Unclear research uses more time.</p>
+            <label>Domain blocklist
+              <textarea name="blocklist" rows="5"></textarea>
+            </label>
+          </div>
+
+          <div class="card settings-card">
+            <span class="eyebrow">YOUR INTRODUCTION</span>
+            <h2>Contact form draft</h2>
+            <p>Prepared only when you click “Prepare form.” Nothing is submitted automatically.</p>
+            <div class="field-grid">
+              <label>Name<input name="name" autocomplete="name"></label>
+              <label>Email<input name="email" type="email" autocomplete="email"></label>
+              <label>Company<input name="company"></label>
+              <label>Website<input name="website" type="url"></label>
+            </div>
+            <label>Subject<input name="subject"></label>
+            <label>Message<textarea name="message" rows="5"></textarea></label>
+          </div>
+
+          <div class="card settings-card gemini-card">
+            <span class="eyebrow">OPTIONAL ASSISTANCE</span>
+            <h2>Gemini assistance</h2>
+            <p>Built-in queries work without a key. Gemini can suggest related topics. When enabled for a campaign, it also receives short public page excerpts and published contact addresses to assess relevance. Free-tier limits and Google’s data terms apply.</p>
+            <label>Gemini model
+              <input name="geminiModel" value="gemini-3.1-flash-lite" autocomplete="off">
+            </label>
+            <label>Gemini API key <span id="key-state"></span>
+              <input name="apiKey" type="password" autocomplete="off" placeholder="Leave blank to keep your saved key">
+            </label>
+            <div class="field-grid model-actions">
+              <label class="check"><input type="checkbox" name="ai"><span>Enable Gemini query suggestions</span></label>
+              <label class="check"><input type="checkbox" name="clearKey"><span>Remove saved key</span></label>
+            </div>
+            <div class="inline-actions">
+              <button id="gemini-test" type="button" class="button">Test Gemini connection</button>
+              <span id="gemini-status" class="hint" role="status">Not tested</span>
+            </div>
+          </div>
+          <button class="button primary save-preferences" type="submit">Save preferences</button>
+        </form>
+
+        <aside class="preferences-side">
+          <form id="sender-form" class="card settings-card sender-card">
+            <span class="eyebrow">SENDER PROFILES</span>
+            <h2>Reusable details for drafts</h2>
+            <p>These profiles fill contact form drafts when you choose to prepare one. They do not connect to an inbox, send email, or authenticate a mailbox.</p>
+            <div id="sender-list" class="sender-list" aria-live="polite"></div>
+            <label>Profile label<input name="senderLabel" autocomplete="off" placeholder="e.g. Studio outreach"></label>
+            <div class="field-grid">
+              <label>Your name<input name="senderName" autocomplete="name"></label>
+              <label>Email<input name="senderEmail" type="email" autocomplete="email"></label>
+              <label>Company<input name="senderCompany" autocomplete="organization"></label>
+              <label>Website<input name="senderWebsite" type="url" autocomplete="url"></label>
+            </div>
+            <label>Subject<input name="senderSubject"></label>
+            <label>Message<textarea name="senderMessage" rows="5"></textarea></label>
+            <button class="button primary wide" type="submit">Save sender profile</button>
+          </form>
+
+          <div class="note backup-card">
+            <h3>Keep your research</h3>
+            <p>Backups include contacts, evidence, sources, notes and history. API keys are excluded.</p>
+            <button id="backup" class="button wide">↓ Download backup</button>
+            <label class="button wide file-label">↑ Restore publisher backup
+              <input id="restore" type="file" accept=".json" hidden>
+            </label>
+            <p class="hint">Version 0.3 contacts are preserved but need a fresh relevance check.</p>
+          </div>
+
+          <div class="note">
+            <h3>What “Ready” means</h3>
+            <p>A usable published contact was found and no firm exclusion applies. The quality score shows how strong the publishing and niche evidence is.</p>
+            <p>It does not promise a reply, accepted pitch, paid placement, backlink attribute or email delivery.</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="card settings-card output-settings">
+        <div class="output-heading">
+          <div>
+            <span class="eyebrow">OPTIONAL DESTINATION</span>
+            <h2>Automatic output Sheet</h2>
+          </div>
+          <span id="output-status" class="output-status" role="status">Not connected</span>
+        </div>
+        <p>Your existing Sheets are read-only duplicate sources. To save results automatically, deploy the included Apps Script on a separate Sheet, then enter its Web App URL and secret here.</p>
+        <div class="output-fields">
+          <label>Web App URL
+            <input id="output-endpoint" type="url" placeholder="https://script.google.com/macros/s/.../exec">
+          </label>
+          <label>Secret
+            <input id="output-secret" type="password" autocomplete="off" placeholder="Leave blank to keep saved secret">
+          </label>
+        </div>
+        <div class="output-actions">
+          <button id="output-connect" type="button" class="button primary">Save and test</button>
+          <button id="output-sync" type="button" class="button">Sync pending</button>
+          <button id="output-disconnect" type="button" class="button danger-button">Disconnect</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>OUTREACH DESK <b>0.6</b></span>
+      <span>Research with evidence. Reach out with purpose.</span>
+    </footer>
+  </main>
+
+  <dialog id="search-dialog" class="search-dialog">
+    <form id="search-form">
+      <div class="dialog-header">
+        <div>
+          <span class="eyebrow">A FOCUSED SEARCH</span>
+          <h2>What kind of publisher do you need?</h2>
+        </div>
+        <button class="close" type="button" data-close="search-dialog" aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="field-grid">
+          <label>Niche<input name="niche" required maxlength="90" placeholder="e.g. Health"></label>
+          <label>Campaign name <span>optional</span><input name="campaignName" maxlength="90" placeholder="e.g. Q4 health publications"></label>
+        </div>
+        <div class="field-grid campaign-settings">
+          <label>Research language
+            <select name="researchLanguage">
+              <option value="any">Any language</option>
+              <option value="en" selected>English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="it">Italian</option>
+              <option value="pt">Portuguese</option>
+              <option value="nl">Dutch</option>
+              <option value="pl">Polish</option>
+              <option value="ur">Urdu</option>
+              <option value="ar">Arabic</option>
+            </select>
+          </label>
+          <label>Sender profile
+            <select name="senderId">
+              <option value="">Default profile</option>
+            </select>
+          </label>
+        </div>
+        <div class="field-grid checks-grid">
+          <label class="check"><input name="checkDatabase" type="checkbox" checked><span>Check existing databases before research</span></label>
+          <label class="check"><input name="checkContacted" type="checkbox" checked><span>Skip publishers already marked as contacted</span></label>
+        </div>
+
+        <label>Selected topic terms<input name="subtopics" maxlength="500" placeholder="Choose suggestions below or add your own"></label>
+        <label class="check related-check"><input name="relatedTopics" type="checkbox"><span>Include related topics in queries and relevance checks</span></label>
+        <div id="topic-chips" class="topic-chips" aria-live="polite"></div>
+        <p class="hint">Related topics are suggestions. Select only subjects you actually want to outreach; broad topics stay off until you choose them.</p>
+
+        <div class="generate">
+          <button class="button" type="button" id="generate">✧ Generate keywords</button>
+          <label class="check"><input name="useGemini" type="checkbox"><span>Use Gemini if connected</span></label>
+          <input name="ai" type="checkbox" class="legacy-ai-field" tabindex="-1" aria-hidden="true">
+        </div>
+        <label>Search keywords <span>editable · one per line</span>
+          <textarea name="queries" rows="5" placeholder="health &quot;write for us&quot;&#10;nutrition &quot;sponsored content&quot;"></textarea>
+        </label>
+        <div id="query-note" class="hint">Queries include contribution and commercial publishing routes.</div>
+
+        <details class="candidate-urls">
+          <summary>Use candidate URLs instead of Google</summary>
+          <label>Website/page URLs<textarea name="urls" rows="3" placeholder="https://publisher.com/write-for-us"></textarea></label>
+        </details>
+
+        <div class="field-grid three">
+          <label>Target ready websites<input name="target" type="number" min="1" max="5000" value="30"></label>
+          <label>Google pages / keyword<input name="maxPages" type="number" min="1" max="20" value="20"></label>
+          <label>Seconds / website<input name="budget" type="number" min="30" max="180" value="90"></label>
+        </div>
+        <div class="field-grid">
+          <label>Pages / website<input name="pageLimit" type="number" min="2" max="10" value="8"></label>
+          <label>Target counts
+            <select name="contactGoal">
+              <option value="email">Useful email only</option>
+              <option value="any">Email or contact form</option>
+              <option value="form">Contact form only</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="setup-section">
+          <div class="setup-section-heading">
+            <strong>Authority and domain filters</strong>
+            <span class="hint">Optional controls for the Google result set.</span>
+          </div>
+          <div class="field-grid authority-grid">
+            <label class="check"><input name="requireDA" type="checkbox"><span>Require MozBar DA on Google results</span></label>
+            <div class="range-control">
+              <label>Minimum DA<input name="daMin" type="number" min="0" max="100" value="30"></label>
+              <label>Maximum DA<input name="daMax" type="number" min="0" max="100" value="70"></label>
+            </div>
+          </div>
+          <p class="hint">DA is read from MozBar’s visible result overlay. If metrics are unavailable, choose Continue without Moz or Stop Campaign; your position is saved. Manual URLs cannot use this filter.</p>
+          <div class="inline-actions">
+            <button id="test-da" type="button" class="button small">Check MozBar metrics</button>
+            <p id="da-status" class="hint" aria-live="polite">Not tested.</p>
+          </div>
+          <label>Allowed domain extensions <span>leave empty to accept all</span>
+            <input name="tlds" placeholder="com, org, net, co.uk">
+          </label>
+        </div>
+        <div class="note compact" id="source-check"></div>
+        <p class="hint">Titles are screened before opening sites. Actual publisher content decides relevance. Research stops at the target or the end of available results.</p>
+      </div>
+      <div class="dialog-footer">
+        <span>Progress saves after every step.</span>
+        <button type="submit" class="button primary">Start research →</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="moz-dialog" class="small-dialog">
+    <div class="dialog-header">
+      <div>
+        <span class="eyebrow">MOZ METRICS CHECK</span>
+        <h2>Confirm the fallback</h2>
+      </div>
+      <button class="close" type="button" data-close="moz-dialog" aria-label="Close">×</button>
+    </div>
+    <div class="dialog-body">
+      <p id="moz-message">MozBar could not provide a trustworthy metric for every result. You can continue without the DA filter or stop before opening publisher sites.</p>
+    </div>
+    <div class="dialog-footer">
+      <button id="moz-stop" type="button" class="button">Stop campaign</button>
+      <button id="moz-continue" type="button" class="button primary">Continue without Moz</button>
+    </div>
+  </dialog>
+
+  <dialog id="detail-dialog" class="detail"><div id="detail-body"></div></dialog>
+  <dialog id="export-dialog" class="small-dialog">
+    <div class="dialog-header">
+      <h2>Export your shortlist</h2>
+      <button class="close" data-close="export-dialog" aria-label="Close">×</button>
+    </div>
+    <div class="dialog-body">
+      <p id="export-count"></p>
+      <label>Export format
+        <select id="export-mode" aria-label="Export format">
+          <option value="publishers" selected>Publishers · one website per campaign row</option>
+          <option value="contacts">Contacts · one email per row with audit details</option>
+        </select>
+      </label>
+      <label class="check"><input type="checkbox" id="export-all"><span>Include excluded and unclassified emails</span></label>
+      <p class="hint">By default, exports include suitable contacts and omit emails from rejected or do-not-contact publishers. Publisher mode keeps one row per website per campaign. Contact mode gives each email its own row with source details.</p>
+      <button id="download-csv" class="button primary wide">Download CSV</button>
+    </div>
+  </dialog>
+
+  <div id="toast" role="status" hidden></div>
+  <script src="../extension/vendor/publisher-deps.js"></script>
+  <script src="../extension/publisher-core.js"></script>
+  <script src="../extension/publisher-rules.js"></script>
+  <script src="../extension/publisher-da.js"></script>
+  <script src="../extension/publisher-topics.js"></script>
+  <script src="../extension/publisher-model.js"></script>
+  <script src="../extension/publisher-sheets.js"></script>
+  <script src="../extension/publisher-output.js"></script>
+  <script src="../extension/publisher-language.js"></script><script src="../extension/publisher-ai.js"></script><script src="../extension/publisher-export.js"></script><script src="publisher-preview-mock.js"></script><script src="../extension/publisher-ui.js"></script>
+</body>
+</html>
